@@ -12,8 +12,13 @@ export default function Indoor() {
       description:
         "Spider plants are known for their long, arching leaves and tiny white flowers"+
         "They are easy to care for and can thrive in a variety of indoor conditions."+
-        "লোকেরা প্রায়শই তাদের বাড়িতে মানি প্ল্যান্ট লাগায়, তবে আপনি যদি মানি প্ল্যান্টের সঙ্গে adadk aksasla saksaskka aslskalsk salskaks slasklaks slasklask alskals as  salksla slaksa sa sklaskal salska slaskl sals askalskaska d smcsd fsdfksd f fdskf sf sak a a স্পাইডার প্ল্যান্ট লাগান তবে আপনি বহুগুণ বেশি সুবিধা পাবেন।",
+        "লোকেরা প্রায়শই তাদের বাড়িতে মানি প্ল্যান্ট লাগায়, তবে আপনি যদি মানি প্ল্যান্টের সঙ্গে স্পাইডার প্ল্যান্ট লাগান তবে আপনি বহুগুণ বেশি সুবিধা পাবেন।"+
+        "Do not water too frequently. Let the soil mostly dry out between waterings."+
+        "Tip: To know when it’s time to water, don’t just rely on how the surface of the soil looks. Instead, carefully stick your finger or a wooden chopstick a couple of inches into the soil. Hold off on watering if you feel any moisture or see soil stick to the chopstick."+
+       "Water from the bottom of the pot, if possible. This encourages the roots to grow downward and deep, helping to stabilize the thick, tall leaves."+ 
+        "During the winter, while the plant isn’t actively growing, water less often than you would in spring and summer.",
       imageUrl: '/spider.jpg',
+      date: "3 Days ago"
     },
     {
       id: 2,
@@ -27,6 +32,7 @@ export default function Indoor() {
        "Water from the bottom of the pot, if possible. This encourages the roots to grow downward and deep, helping to stabilize the thick, tall leaves."+ 
         "During the winter, while the plant isn’t actively growing, water less often than you would in spring and summer.",
       imageUrl: '/snake.jpg',
+      date: "10-01-2017",
     },
     // Add more plant objects here...
   ];
@@ -37,37 +43,51 @@ export default function Indoor() {
   return (
     
 <Layout page={Indoor}>
+<>
+<div>
   {plants.length > 0 ? (
     plants.map((plant) => (
-      <div key={plant.id} className="min-h-screen flex flex-col bg-gray-100 p-8">
-        <div className="text-xl font-bold mb-2 flex flex-col justify-center items-center">
-          {plant.name}
+      <div key={plant.id} className="bg-white rounded-md shadow-lg p-6 mb-4">
+        <div className="flex items-center mb-4">
+          <img src={plant.imageUrl} alt={plant.name} className="w-10 h-10 rounded-full" />
+          <div className="ml-4">
+            <div className="font-bold">{plant.name}</div>
+            <div className="text-gray-500">Posted on {plant.date}</div>
+          </div>
         </div>
 
-        <div className="flex-1 flex flex-col justify-center items-center">
-          <div className="text-gray-700 mb-2">
-            {`${plant.description.substring(0, 300)}`}
-          </div>
-          <img
-            src={plant.imageUrl}
-            alt={plant.name}
-            className="w-3/4 object-cover"
-          />
-          <div className="text-gray-700 mb-2">
-            {`${plant.description.substring(300, 600)}...`}
-          </div>
-          {plant.description.length > 200 && (
-             <Link href={`/user/${plant.id}`}  className="text-blue-500">
-            See More
-           </Link>
-           
-          )}
+        <div className="text-gray-700 mb-4">
+          {plant.description.substring(0, 200)}
         </div>
+
+        {/* For mobile view, make the image full-screen */}
+        <div className="flex flex-col justify-center items-center">
+          <p className="text-gray-700 mb-4">{`${plant.description.substring(0, 300)}`}</p>
+          <img
+          src={plant.imageUrl}
+          alt={plant.name}
+          className="w-full mx-auto mb-4 rounded-lg"
+          style={{ maxWidth: '90%', height: 'auto' }}
+        />
+          <div className="text-gray-500">Latin Name: {plant.latinName}</div>
+          </div>
+        <div className="text-gray-700 mb-4">
+          {`${plant.description.substring(200, 500)}...`}
+        </div>
+
+        {plant.description.length > 500 && (
+          <Link href={`/user/${plant.id}`} className="text-blue-500">
+            See More
+          </Link>
+        )}
       </div>
     ))
   ) : (
-    <li></li>
+    <div>No plants to display.</div>
   )}
+</div>
+
+    </>
 </Layout>
 
   

@@ -3,7 +3,6 @@ import Head from 'next/head';
 import Navigation from './navigation';
 import Footer from './footer';
 
-
 export default function Layout({ children, page }) {
     return (
         <>
@@ -11,16 +10,27 @@ export default function Layout({ children, page }) {
                 <title>Tri_Gerdening-{page}</title>
             </Head>
            
-           
-           <Navigation></Navigation>
-           <div  className="min-h-screen bg-gray-300  "> {/* Set background color */}
-                <div className="background max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"> {/* Set content container */}
-                    <main>{children}</main>
-                </div>
-            </div>
+            <div className="fixed w-full top-0 z-50">
+               <Navigation />
+           </div>
 
+           <div className="min-h-screen mt-16 bg-gray-300">
+               {/* Desktop view */}
+               <div className="hidden sm:flex justify-center items-center">
+                   <div className="max-w-6xl w-full px-4">
+                       <main>{children}</main>
+                   </div>
+               </div>
 
-            <Footer></Footer>
+               {/* Mobile view */}
+               <div className="sm:hidden">
+                   <div>
+                       <main>{children}</main>
+                   </div>
+               </div>
+           </div>
+
+           <Footer />
         </>
     );
 }

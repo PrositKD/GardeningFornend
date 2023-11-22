@@ -29,30 +29,46 @@ export default function ViewPost() {
 
   return (
     <Layout page="Gardening">
-      <div className="bg-white p-4 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-semibold mb-4">Plant Information</h1>
+      <div className="">
+      <div className="bg-white p-6 rounded-lg shadow-lg">
         <p className="mb-4">Your plant's ID is {viewpost !== undefined ? viewpost : 'ID is undefined'}</p>
-
+        <div className="flex items-center mb-4">
+              <img src={plant.imageUrl} alt={plant.name} className="w-12 h-12 rounded-full" />
+              <div className="ml-4">
+                <div className="font-bold">{plant.name}</div>
+                <div className="text-gray-500">Posted on {plant.date}</div>
+              </div>
+            </div>
         <div className="flex flex-col justify-center items-center">
-          <h2 className="text-2xl font-bold mb-4">{plant.name}</h2>
           <p className="text-gray-700 mb-4">{`${plant.description.substring(0, 300)}`}</p>
-          <img src={plant.imageUrl} alt={plant.name} className="w-3/4 object-cover mb-4" />
+          <img
+          src={plant.imageUrl}
+          alt={plant.name}
+          className="w-full mx-auto mb-4 rounded-lg"
+          style={{ maxWidth: '90%', height: 'auto' }}
+        />
+          <div className="text-gray-500">Latin Name: {plant.latinName}</div>
           <p className="text-gray-700">{`${plant.description.substring(300)}`}</p>
         </div>
-      </div>
+      
 
-      <div className="mt-8">
-        <h2 className="text-2xl font-semibold mb-4">Comments and Questions</h2>
+      <div className="mt-8 bg-gray-200 p-2 rounded-md">
+        <h2 className="text-2xl font-semibold mb-4 ">Comments and Questions</h2>
         <CommentForm onCommentSubmit={handleCommentSubmit} />
-
+        </div>
         <div className="mt-4 space-y-2">
           {comments.map((comment, index) => (
             <div key={index} className="bg-gray-100 p-2 rounded-md">
-              {comment}
+           
+             <div className="ml-4">
+                <div className="font-bold"> {plant.name}</div>
+                <div className="text-gray-500"> {comment}</div>
+              </div>
             </div>
           ))}
         </div>
-      </div>
+        </div>
+        </div>
     </Layout>
   );
 }
